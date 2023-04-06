@@ -33,8 +33,8 @@ def extract_documents(sentence1,productName):
             match = re.search(pattern, sentence1)
             if match:
                 extracted_words_from_sentence.add(key)
-    print("words from sentence")
-    print(extracted_words_from_sentence)
+        # print("words from sentence")
+        # print(extracted_words_from_sentence)
     #comparisions based on products
     df = pd.read_excel (r'./test_sample_1.xlsx')
     data = df[['Keywords (m)','Product','Document Name','DOC ID']]
@@ -75,7 +75,7 @@ def extract_documents(sentence1,productName):
             data.at[idx, 'score'] = score
     data.to_csv('pavan.csv')
     df_final = data.nlargest(3, 'score')
-    result_final_output = df_final.to_json(orient="records")
+    result_final_output = df_final[["DOC ID"]].to_numpy().flatten()
     print(result_final_output)
     return result_final_output
 
